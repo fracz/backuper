@@ -28,17 +28,28 @@ exec('cd ' . $dirPath . ' && tar czf ' . $fileName . '.tgz ' . $fileName . '.sql
 unlink($localFilePath . '.sql');
 
 $localFilePath .= '.tgz';
-
-$copy = new \Barracuda\Copy\API(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, SECRET);
-$fh = fopen($localFilePath, 'rb');
-$parts = [];
-while ($data = fread($fh, 1024 * 1024)) {
-    $parts[] = $copy->sendData($data);
-}
-fclose($fh);
-$copy->createFile(COPY_DIR . '/' . $fileName . '.tgz', $parts);
-
 $oldFilesFrom = time() - BACKUP_EXPIRATION;
+
+try {
+    $copy = new \Barracuda\Copy\API(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, SECRET);
+    $fh = fopen($localFilePath, 'rb');
+    $parts = [];
+    while ($data = fread($fh, 1024 * 1024)) {
+        $parts[] = $copy->sendData($data);
+    }
+    fclose($fh);
+    $copy->createFile(COPY_DIR . '/' . $fileName . '.tgz', $parts);
+
+    $backups = $copy->listPath(COPY_DIR);
+    foreach ($backups as $backup) {
+        if ($oldFilesFrom > $backup->created_time) {
+            $copy->removeFile($backup->path);
+        }
+    }
+} catch (Exception $e) {
+    echo 'Unable to upload file to Copy' . PHP_EOL;
+    echo $e;
+}
 
 if (LOCAL_DIR) {
     rename($localFilePath, LOCAL_DIR . '/' . $fileName . '.tgz');
@@ -54,12 +65,3 @@ if (LOCAL_DIR) {
 } else {
     unlink($localFilePath);
 }
-
-$backups = $copy->listPath(COPY_DIR);
-foreach ($backups as $backup) {
-    if ($oldFilesFrom > $backup->created_time) {
-        $copy->removeFile($backup->path);
-    }
-}
-
-
