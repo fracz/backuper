@@ -1,0 +1,15 @@
+{
+    "name": "fracz/backuper",
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*",
+        "barracuda/copy": "1.*",
+        "eher/oauth": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "fracz",
+            "email": "fraczwojciech@gmail.com"
+        }
+    ]
+}
