@@ -2,7 +2,7 @@
 
 error_reporting(E_ERROR);
 
-if(!file_exists('config.php'))
+if (!file_exists('config.php'))
     die('config.php file does not exists. Use config.sample.php to create your configuration.');
 
 $dir = __DIR__;
@@ -36,19 +36,13 @@ while ($data = fread($fh, 1024 * 1024)) {
     $parts[] = $copy->sendData($data);
 }
 fclose($fh);
-$copy->createFile($copyConfig->backup_dir . $filename, $parts);
+$copy->createFile(COPY_DIR . '/' . $fileName . '.tgz', $parts);
 
-$backups = $copy->listPath($copyConfig->backup_dir);
-foreach($backups as $backup){
-    if($oldFilesFrom > $backup->created_time){
-        $copy->removeFile($backup->path);
-    }
-}
+$oldFilesFrom = time() - BACKUP_EXPIRATION;
 
-if(LOCAL_DIR){
+if (LOCAL_DIR) {
     rename($localFilePath, LOCAL_DIR . '/' . $fileName . '.tgz');
     $dir = opendir(LOCAL_DIR);
-    $oldFilesFrom = time() - BACKUP_EXPIRATION;
     while ($file = readdir($dir)) {
         if (end(explode('.', $file)) == 'tgz') {
             $time = filemtime($dirPath . '/' . $file);
@@ -61,5 +55,11 @@ if(LOCAL_DIR){
     unlink($localFilePath);
 }
 
+$backups = $copy->listPath(COPY_DIR);
+foreach ($backups as $backup) {
+    if ($oldFilesFrom > $backup->created_time) {
+        $copy->removeFile($backup->path);
+    }
+}
 
 
