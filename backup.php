@@ -15,10 +15,9 @@ $fileName = date('Y.m.d_H.i');
 $dirPath = $dir;
 $localFilePath = "$dirPath/$fileName";
 
-$cmd = sprintf("%s -u %s --password=\"%s\" -d %s --skip-no-data > %s",
+$cmd = sprintf("%s -u %s --databases %s > %s",
     MYSQLDUMP,
     escapeshellcmd(DB_USERNAME),
-    escapeshellcmd(DB_PASSWORD),
     escapeshellcmd(DB_DATABASE),
     escapeshellcmd($localFilePath . '.sql'));
 
