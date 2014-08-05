@@ -2,10 +2,13 @@
 
 error_reporting(E_ERROR);
 
-if (!file_exists('config.php'))
+$dir = __DIR__;
+
+if (!file_exists($dir . '/config.php'))
     die('config.php file does not exists. Use config.sample.php to create your configuration.');
 
-$dir = __DIR__;
+if (!file_exists($dir . '/vendor/autoload.php'))
+    die('Download composer dependencies.');
 
 require $dir . '/config.php';
 require_once $dir . '/vendor/autoload.php';
@@ -42,7 +45,7 @@ try {
 
     $backups = $copy->listPath(COPY_DIR);
     foreach ($backups as $backup) {
-        if ($oldFilesFrom > $backup->created_time) {
+        if ($oldFilesFrom > $backup->created_time && end(explode('.', $backup->path)) == 'tgz') {
             $copy->removeFile($backup->path);
         }
     }
