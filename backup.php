@@ -14,7 +14,7 @@ require $dir . '/config.php';
 require_once $dir . '/vendor/autoload.php';
 
 
-$fileName = date('Y.m.d_H.i');
+$fileName = FILENAME_PREFIX . date('Y-m-d_H.i');
 $dirPath = $dir;
 $localFilePath = "$dirPath/$fileName";
 
