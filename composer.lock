@@ -4,21 +4,15 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ef3043d2161eeac000af27053bf7e1c9",
+    "hash": "382a6494d6b1bc83d7a7c0fcc4f52c37",
     "packages": [
         {
             "name": "barracuda/copy",
-            "version": "1.0.1",
+            "version": "dev-v2_part_method_content_type",
             "source": {
                 "type": "git",
-                "url": "https://github.com/copy-app/php-client-library.git",
-                "reference": "4f61a5030256d4b3d46337e91eb3698446bbb1d3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/copy-app/php-client-library/zipball/4f61a5030256d4b3d46337e91eb3698446bbb1d3",
-                "reference": "4f61a5030256d4b3d46337e91eb3698446bbb1d3",
-                "shasum": ""
+                "url": "https://github.com/ablyler/php-client-library",
+                "reference": "31f78a16e06b640d00cdd213d3ea989d4ed170ce"
             },
             "require": {
                 "eher/oauth": "dev-master",
@@ -35,7 +29,6 @@
                     "Barracuda\\Copy\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -44,7 +37,7 @@
             "keywords": [
                 "copy"
             ],
-            "time": "2014-03-03 03:38:50"
+            "time": "2014-08-10 19:08:56"
         },
         {
             "name": "eher/oauth",
@@ -88,11 +81,14 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "barracuda/copy": 20,
         "eher/oauth": 20
     },
-    "platform": [
-
-    ],
+    "prefer-stable": false,
+    "platform": {
+        "php": ">=5.4",
+        "ext-curl": "*"
+    },
     "platform-dev": [
 
     ]
