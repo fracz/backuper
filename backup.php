@@ -10,19 +10,52 @@ if (!file_exists($dir . '/config.php'))
 if (!file_exists($dir . '/vendor/autoload.php'))
     die('Download composer dependencies.');
 
+//if (!file_exists('~/.my.cnf'))
+//    die('Create ~/.my.cnf file with database access configuration.');
+
 require $dir . '/config.php';
 require_once $dir . '/vendor/autoload.php';
 
+$cli = new \Commando\Command();
 
-$fileName = FILENAME_PREFIX . date('Y-m-d_H.i');
+$cli->option()
+    ->require()
+    ->describedAs('Database name. Specify multiple databases by comma.')
+    ->default(DB_NAME);
+
+$cli->option('u')
+    ->require()
+    ->aka('username')
+    ->describedAs('Username to connect to the database (should be the same as in ~/.my.cnf file.')
+    ->default(DB_USERNAME);
+
+$cli->option('p')
+    ->aka('prefix')
+    ->describedAs('Prefix of the backup filename.')
+    ->default(FILENAME_PREFIX);
+
+$cli->option('d')
+    ->aka('dir')
+    ->describedAs('Name of the Copy directory where the backup should be stored.')
+    ->default(COPY_DIR);
+
+$cli->flag('v')
+    ->boolean()
+    ->aka('verbose')
+    ->describedAs('Turns on verbose mode.');
+
 $dirPath = $dir;
 $localFilePath = "$dirPath/$fileName";
+$fileName = $cli['p'] . date('Y-m-d_H.i');
 
 $cmd = sprintf("%s -u %s --databases %s > %s",
     MYSQLDUMP,
-    escapeshellcmd(DB_USERNAME),
-    escapeshellcmd(DB_DATABASE),
+    escapeshellcmd($cli['u']),
+    escapeshellcmd($cli[0]),
     escapeshellcmd($localFilePath . '.sql'));
+
+if($cli['v'])
+    echo 'Executing: ' . $cmd . PHP_EOL;
 
 exec($cmd);
 
@@ -41,9 +74,9 @@ try {
         $parts[] = $copy->sendData($data);
     }
     fclose($fh);
-    $copy->createFile(COPY_DIR . '/' . $fileName . '.tgz', $parts);
+    $copy->createFile($cli['d'] . '/' . $fileName . '.tgz', $parts);
 
-    $backups = $copy->listPath(COPY_DIR);
+    $backups = $copy->listPath($cli['d']);
     foreach ($backups as $backup) {
         if ($oldFilesFrom > $backup->created_time && end(explode('.', $backup->path)) == 'tgz') {
             $copy->removeFile($backup->path);

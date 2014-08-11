@@ -9,6 +9,7 @@
     "require": {
         "php": ">=5.4",
         "ext-curl": "*",
+        "nategood/commando": "*",
         "barracuda/copy": "dev-v2_part_method_content_type",
         "eher/oauth": "dev-master"
     },
