@@ -47,7 +47,7 @@ $cli->flag('v')
     ->describedAs('Turns on verbose mode.');
 
 $dirPath = $dir;
-$fileName = $cli['p'] . date('Y-m-d_H.i');
+$fileName = $cli['p'] . date('Y-m-d_H.i.s');
 $localFilePath = "$dirPath/$fileName";
 
 $cmd = sprintf("%s -u %s --databases %s > %s",
