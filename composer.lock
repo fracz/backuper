@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6151bd9738f4b939e64ca755fa796da0",
+    "hash": "fe059bacb7eaa2afc436d0ac8520a27b",
     "packages": [
         {
             "name": "barracuda/copy",
@@ -179,7 +179,7 @@
     },
     "prefer-stable": false,
     "platform": {
-        "php": ">=5.4",
+        "php": ">=5.3",
         "ext-curl": "*"
     },
     "platform-dev": [

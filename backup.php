@@ -10,8 +10,8 @@ if (!file_exists($dir . '/config.php'))
 if (!file_exists($dir . '/vendor/autoload.php'))
     die('Download composer dependencies.');
 
-//if (!file_exists('~/.my.cnf'))
-//    die('Create ~/.my.cnf file with database access configuration.');
+if (!file_exists('~/.my.cnf'))
+    die('Create ~/.my.cnf file with database access configuration.');
 
 require $dir . '/config.php';
 require_once $dir . '/vendor/autoload.php';
@@ -71,7 +71,7 @@ $oldFilesFrom = time() - BACKUP_EXPIRATION;
 try {
     $copy = new \Barracuda\Copy\API(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, SECRET);
     $fh = fopen($localFilePath, 'rb');
-    $parts = [];
+    $parts = array();
     while ($data = fread($fh, 1024 * 1024)) {
         $parts[] = $copy->sendData($data);
     }
