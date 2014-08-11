@@ -21,11 +21,13 @@ $cli = new \Commando\Command();
 $cli->option()
     ->require()
     ->describedAs('Database name. Specify multiple databases by comma.')
+    ->must(function($dbName) { return strlen($dbName) > 0; })
     ->default(DB_NAME);
 
 $cli->option('u')
     ->require()
     ->aka('username')
+    ->must(function($username) { return strlen($username) > 0; })
     ->describedAs('Username to connect to the database (should be the same as in ~/.my.cnf file.')
     ->default(DB_USERNAME);
 
@@ -45,8 +47,8 @@ $cli->flag('v')
     ->describedAs('Turns on verbose mode.');
 
 $dirPath = $dir;
-$localFilePath = "$dirPath/$fileName";
 $fileName = $cli['p'] . date('Y-m-d_H.i');
+$localFilePath = "$dirPath/$fileName";
 
 $cmd = sprintf("%s -u %s --databases %s > %s",
     MYSQLDUMP,
