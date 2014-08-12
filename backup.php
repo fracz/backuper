@@ -7,13 +7,14 @@ $dir = __DIR__;
 if (!file_exists($dir . '/config.php'))
     die('config.php file does not exists. Use config.sample.php to create your configuration.');
 
+require $dir . '/config.php';
+
 if (!file_exists($dir . '/vendor/autoload.php'))
     die('Download composer dependencies.');
 
-if (!file_exists('~/.my.cnf'))
+if (!file_exists(MY_CNF_PATH))
     die('Create ~/.my.cnf file with database access configuration.');
 
-require $dir . '/config.php';
 require_once $dir . '/vendor/autoload.php';
 
 $cli = new \Commando\Command();
@@ -50,9 +51,10 @@ $dirPath = $dir;
 $fileName = $cli['p'] . date('Y-m-d_H.i.s');
 $localFilePath = "$dirPath/$fileName";
 
-$cmd = sprintf("%s -u %s --databases %s > %s",
+$cmd = sprintf("%s -u %s --defaults-extra-file %s --databases %s > %s",
     MYSQLDUMP,
     escapeshellcmd($cli['u']),
+    MY_CNF_PATH,
     escapeshellcmd($cli[0]),
     escapeshellcmd($localFilePath . '.sql'));
 
