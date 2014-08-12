@@ -51,10 +51,10 @@ $dirPath = $dir;
 $fileName = $cli['p'] . date('Y-m-d_H.i.s');
 $localFilePath = "$dirPath/$fileName";
 
-$cmd = sprintf("%s -u %s --defaults-extra-file %s --databases %s > %s",
+$cmd = sprintf("%s --defaults-extra-file=%s -u %s --databases %s --result-file=%s",
     MYSQLDUMP,
-    escapeshellcmd($cli['u']),
     MY_CNF_PATH,
+    escapeshellcmd($cli['u']),
     escapeshellcmd($cli[0]),
     escapeshellcmd($localFilePath . '.sql'));
 
