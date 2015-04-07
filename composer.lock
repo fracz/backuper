@@ -4,24 +4,32 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fe059bacb7eaa2afc436d0ac8520a27b",
+    "hash": "bda3ba4ea39f5e3179fb57ec14a87e1e",
     "packages": [
         {
             "name": "barracuda/copy",
-            "version": "dev-v2_part_method_content_type",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ablyler/php-client-library",
-                "reference": "31f78a16e06b640d00cdd213d3ea989d4ed170ce"
+                "url": "https://github.com/copy-app/php-client-library.git",
+                "reference": "ef60bee6a57ad171258391f981dbd395ececa3e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/copy-app/php-client-library/zipball/ef60bee6a57ad171258391f981dbd395ececa3e0",
+                "reference": "ef60bee6a57ad171258391f981dbd395ececa3e0",
+                "shasum": ""
             },
             "require": {
-                "eher/oauth": "dev-master",
+                "eher/oauth": "1.0.*",
                 "ext-curl": "*",
                 "ext-json": "*",
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "jakub-onderka/php-console-highlighter": "0.*",
+                "jakub-onderka/php-parallel-lint": "0.*",
+                "phpunit/phpunit": "~4.2"
             },
             "type": "library",
             "autoload": {
@@ -29,6 +37,7 @@
                     "Barracuda\\Copy\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -37,20 +46,20 @@
             "keywords": [
                 "copy"
             ],
-            "time": "2014-08-10 19:08:56"
+            "time": "2015-03-07 14:30:23"
         },
         {
             "name": "eher/oauth",
-            "version": "dev-master",
+            "version": "1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EHER/OAuth.git",
-                "reference": "c78a7d538cb4bd52770238c7b4e193e3e0b596ed"
+                "reference": "935c1f7709d1c1457de9e250d0e5f29cac06e507"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EHER/OAuth/zipball/c78a7d538cb4bd52770238c7b4e193e3e0b596ed",
-                "reference": "c78a7d538cb4bd52770238c7b4e193e3e0b596ed",
+                "url": "https://api.github.com/repos/EHER/OAuth/zipball/935c1f7709d1c1457de9e250d0e5f29cac06e507",
+                "reference": "935c1f7709d1c1457de9e250d0e5f29cac06e507",
                 "shasum": ""
             },
             "require": {
@@ -70,7 +79,7 @@
                 "BSD-3-Clause"
             ],
             "description": "OAuth 1 PHP Library",
-            "time": "2013-10-31 14:23:58"
+            "time": "2012-12-13 23:48:10"
         },
         {
             "name": "kevinlebrun/colors.php",
@@ -120,16 +129,16 @@
         },
         {
             "name": "nategood/commando",
-            "version": "0.2.6",
+            "version": "0.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nategood/commando.git",
-                "reference": "d6c76c3478a5b90b4f1c79c7b3ca0dfe43ef77d6"
+                "reference": "873183f0062514ff8c50851f0d8ce98cbbd5ac72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nategood/commando/zipball/d6c76c3478a5b90b4f1c79c7b3ca0dfe43ef77d6",
-                "reference": "d6c76c3478a5b90b4f1c79c7b3ca0dfe43ef77d6",
+                "url": "https://api.github.com/repos/nategood/commando/zipball/873183f0062514ff8c50851f0d8ce98cbbd5ac72",
+                "reference": "873183f0062514ff8c50851f0d8ce98cbbd5ac72",
                 "shasum": ""
             },
             "require": {
@@ -149,8 +158,7 @@
             "authors": [
                 {
                     "name": "Nate Good",
-                    "email": "me@nategood.com",
-                    "homepage": "http://nategood.com"
+                    "email": "me@nategood.com"
                 }
             ],
             "description": "PHP CLI Commando Style",
@@ -163,26 +171,18 @@
                 "command line interface",
                 "scripting"
             ],
-            "time": "2014-05-14 01:19:26"
+            "time": "2015-01-05 15:55:41"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "barracuda/copy": 20,
-        "eher/oauth": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3",
         "ext-curl": "*"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

@@ -10,8 +10,8 @@
         "php": ">=5.3",
         "ext-curl": "*",
         "nategood/commando": "*",
-        "barracuda/copy": "dev-v2_part_method_content_type",
-        "eher/oauth": "dev-master"
+        "barracuda/copy": "1.1.6",
+        "eher/oauth": "1.0.7"
     },
     "authors": [
         {
